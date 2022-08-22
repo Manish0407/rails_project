@@ -1,0 +1,42 @@
+<head>
+  <title>New Book</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ </head>
+ <body class="background">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark container-12">
+     <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Home", homes_path %>></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Edit", edit_book_path(@book) %>></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Destroy", book_path(@book), data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        } %>></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Books", books_path %>></a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Back", books_path %>></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <h1><%= @book.name %></h1>
+
+  <p><%= @book.book_author %></p>
+</body>
