@@ -1,0 +1,65 @@
+<head>
+  <title>New Book</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ </head>
+ <body class="background">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark container-12">
+     <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Home", homes_path %>></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Create Book", new_book_path %> ></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Books", books_path %>></a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Back", homes_path %>></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div>
+    <caption><b>Create Book</b></caption>
+    <%= form_with model: @book do |form| %>
+      <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+        <% @book.errors.full_messages_for(:name).each do |message| %>
+          <div><%= message %></div>
+        <% end %>  
+      </div>
+
+      <div>
+        <%= form.label :book_author %><br>
+        <%= form.text_field :book_author %>
+        <% @book.errors.full_messages_for(:book_author).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.label :qty %><br>
+        <%= form.number_field :qty %>
+        <% @book.errors.full_messages_for(:qty).each do |message| %>
+          <div><%= message %></div>
+        <% end %>  
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</body>
