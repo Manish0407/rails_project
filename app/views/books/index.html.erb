@@ -25,26 +25,26 @@
         </li>
       </ul>
     </div>
+    <div class="name"> 
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>
+    <div class="name"> <%= current_user.name %> </div>
   </nav>
-  <br>
-  <table border="3px" cellpadding="3px" cellspacing="3px">
+  <div class="book">
     <caption>Books Details</caption>
-    <tr>
-      <th>Book Id</th>
-      <th>Book Name</th>
-      <th>Book Author</th>
-      <th>Book Quantity</th>
-    </tr>
-    <% @books.each do |book| %>
+    <table border="3px" cellpadding="3px" cellspacing="3px">
       <tr>
-        <td> <%= link_to book.id, book %> </td>
-        <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
-        <td> <%= link_to book.book_author, book %> </td>
-        <td> <%= link_to book.qty, book %> </td>
+        <th>Book Name</th>
+        <th>Book Author</th>
+        <th>Book Quantity</th>
       </tr>
-    <% end %> 
-  </table>
+      <% @books.each do |book| %>
+        <tr>
+          <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
+          <td> <%= link_to book.book_author, book %> </td>
+          <td> <%= link_to book.qty, book %> </td>
+        </tr>
+      <% end %> 
+    </table>
+  </div>
 </body>
-<div ><%= link_to "New Book", new_book_path %></div>
-
-<%= link_to "Back", homes_path %>

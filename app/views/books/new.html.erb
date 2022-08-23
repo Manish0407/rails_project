@@ -25,12 +25,16 @@
           <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Back", homes_path %>></a>
+          <a class="nav-link" <%= link_to "Back", books_path %>></a>
         </li>
       </ul>
     </div>
+    <div class="name"> 
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>
+    <div class="name"> <%= current_user.name %> </div>
   </nav>
-  <div>
+  <div class="contain">
     <caption><b>Create Book</b></caption>
     <%= form_with model: @book do |form| %>
       <div>

@@ -35,6 +35,10 @@
         </li>
       </ul>
     </div>
+    <div class="name"> 
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>
+    <div class="name"> <%= current_user.name %> </div>
   </nav>
   <h1><%= @book.name %></h1>
 
