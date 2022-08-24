@@ -29,6 +29,10 @@
   box-shadow: 5px 5px 5px 5px black;
   padding: 10px;
 }
+.edit{
+  width: 500px;
+  box-shadow: 3px 3px 3px 3px black;
+}
 .field{
   height: 70px;
   width: 80;
@@ -47,5 +51,6 @@ table{
   height: 250px;
 }
 .name{
-  color: wheat;
+  color: gold;
+  margin-right: 50px;
 }
