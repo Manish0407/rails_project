@@ -12,10 +12,11 @@
         <li class="nav-item">
           <a class="nav-link"<%= link_to "Home", homes_path %>></a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" <%= link_to "Create Book", new_book_path %> ></a>
-        </li>
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <a class="nav-link" <%= link_to "Create Book", new_book_path %> ></a>
+          </li>
+        <% end %>  
       
         <li class="nav-item">
           <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
@@ -38,13 +39,24 @@
         <th>Book Author</th>
         <th>Book Quantity</th>
       </tr>
-      <% @books.each do |book| %>
-        <tr>
-          <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
-          <td> <%= link_to book.book_author, book %> </td>
-          <td> <%= link_to book.qty, book %> </td>
-        </tr>
-      <% end %> 
+      <% if current_user.admin? %>
+        <% @books.each do |book| %>
+          <tr>
+            <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
+            <td> <%= link_to book.book_author, book %> </td>
+            <td> <%= link_to book.qty, book %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% if current_user.student? %>
+        <% @books.each do |book| %>
+          <tr>
+            <td> <%= book.name %> </abbr></td>
+            <td> <%= book.book_author %> </td>
+            <td> <%= book.qty%> </td>
+          </tr>
+        <% end %> 
+      <% end %>   
     </table>
   </div>
 </body>

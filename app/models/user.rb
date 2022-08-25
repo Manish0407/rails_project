@@ -5,4 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # def admin?
+  #   user_type == "admin"
+  # end
+
+  # def student?
+  #   user_type == "student"
+  # end
 end
