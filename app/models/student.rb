@@ -1,3 +1,3 @@
 class Student < User
-  belongs_to :user
+  #belongs_to :user
 end

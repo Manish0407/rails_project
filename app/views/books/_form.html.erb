@@ -32,7 +32,15 @@
     <div class="name"> 
       <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
     </div>
-    <div class="name"> <%= current_user.name %> </div>
+    <% if current_user.admin? %>
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name">(Admin)</(span>)
+    <% end %>  
+
+    <% if current_user.student? %>
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name">(Student)</span>
+    <% end %>  
   </nav>
   <div>
     <caption><b>Edit Book</b></caption>
@@ -40,25 +48,25 @@
       <div>
         <%= form.label :name %><br>
         <%= form.text_field :name %>
-        <% @book.errors.full_messages_for(:name).each do |message| %>
-          <div><%= message %></div>
-        <% end %>  
+        <!--<#% @book.errors.full_messages_for(:name).each do |message| %> -->
+          <!-- <div><#%= message %></div> -->
+         <!--  <#% end %> --> 
       </div>
 
       <div>
         <%= form.label :book_author %><br>
         <%= form.text_field :book_author %>
-        <% @book.errors.full_messages_for(:book_author).each do |message| %>
-          <div><%= message %></div>
-        <% end %>
+       <!--  <#% @book.errors.full_messages_for(:book_author).each do |message| %> -->
+          <!-- <div><#%= message %></div> -->
+       <!--  <#% end %> -->
       </div>
 
       <div>
         <%= form.label :qty %><br>
         <%= form.number_field :qty %>
-        <% @book.errors.full_messages_for(:qty).each do |message| %>
-          <div><%= message %></div>
-        <% end %>  
+       <!--  <#% @book.errors.full_messages_for(:qty).each do |message| %> -->
+          <!-- <div><#%= message %></div> -->
+         <!--  <#% end %> -->
       </div>
 
       <div>

@@ -32,7 +32,15 @@
     <div class="name"> 
       <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
     </div>
-    <div class="name"> <%= current_user.name %> </div>
+    <% if current_user.admin? %>
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name">(Admin)</(span>)
+    <% end %>  
+
+    <% if current_user.student? %>
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name">(Student)</span>
+    <% end %>  
   </nav>
   <div class="contain">
     <caption><b>Create Book</b></caption>

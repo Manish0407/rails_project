@@ -1,3 +1,4 @@
 class Admin < User
-  belongs_to :user
+  has_many :books
+  #belongs_to :user
 end

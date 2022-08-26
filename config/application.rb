@@ -10,6 +10,9 @@ module Lms
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    # config.after_initialize do
+    #   Rails.logger.level = (ENV['LOG_LEVEL'] || Logger::INFO).to_i
+    # end
 
     # Configuration for the application, engines, and railties goes here.
     #
