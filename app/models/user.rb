@@ -1,16 +1,20 @@
 class User < ApplicationRecord
   #has_many :books
-  enum :user_type, [:admin, :student]
+  #enum :type, [:admin, :student]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  # def admin?
-  #   user_type == "admin"
-  # end
+  validates :email, confirmation: true
+  validate :name, presence: true
+  #validates :email_confirmation, presence: true
 
-  # def student?
-  #   user_type == "student"
-  # end
+  def admin?
+    type == "Admin"
+  end
+
+  def student?
+    type == "Student"
+  end
 end
