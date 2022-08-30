@@ -21,12 +21,13 @@
  background-size: cover;
 }
 .contain{
-  width: 350px;
+  width: auto;
+  height: auto;
   margin-top: 50px;
   margin-left: 450px;
   margin-right: 450px;
   background-color: whitesmoke;
-  box-shadow: 5px 5px 5px 5px black;
+  box-shadow: 3px 3px 3px 3px black;
   padding: 10px;
 }
 .edit{
@@ -36,6 +37,7 @@
 .field{
   height: 70px;
   width: 80;
+  padding: 10px;
 }
 .book{
   width: 550px;
@@ -53,4 +55,9 @@ table{
 .name{
   color: gold;
   margin-right: 50px;
+}
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
 }

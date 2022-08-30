@@ -6,9 +6,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  validates :email, confirmation: true
-  validate :name, presence: true
-  #validates :email_confirmation, presence: true
+  validates :email, confirmation: true, presence: true
+  validates :name, presence: true, length: { minimum: 3, too_short: "must have at least %{count} characters." }
+  validates :password, confirmation: true
 
   def admin?
     type == "Admin"
