@@ -27,12 +27,12 @@
   margin-left: 450px;
   margin-right: 450px;
   background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px black;
+  box-shadow: 3px 3px 20px black;
   padding: 10px;
 }
 .edit{
   width: 500px;
-  box-shadow: 3px 3px 3px 3px black;
+  box-shadow: 3px 3px 20px black;
 }
 .field{
   height: 70px;
@@ -40,13 +40,11 @@
   padding: 10px;
 }
 .book{
-  width: 550px;
-  height: 300px;
-  /*margin-top: 50px;
-  margin-left: 450px;
-  margin-right: 450px;*/
+  width: 500px;
+  height: auto;
+  text-align: center;
   background-color: whitesmoke;
-  box-shadow: 5px 5px 5px 5px black;
+  box-shadow: 2px 2px 20px black;
 }
 table{
   width: 500px;

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   #has_many :books
-  #enum :type, [:admin, :student]
+  before_validation :normalize_name, on: :create
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # Include default devise modules. Others available are:
@@ -17,4 +17,9 @@ class User < ApplicationRecord
   def student?
     type == "Student"
   end
+
+  private
+    def normalize_name
+      self.name = name.downcase.titleize
+    end
 end

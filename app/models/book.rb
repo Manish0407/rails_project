@@ -1,7 +1,12 @@
 class Book < ApplicationRecord
-  # validates :name, presence: true
-  # validates :book_author, presence: true, uniqueness: true
+  before_validation :normalize_name, on: :create 
   validates :name, presence: true, uniqueness: { scope: :book_author }
-  validates :qty, presence: true, length: { minimum: 1 } 
+  validates :qty, presence: true, length: { minimum: 1 }
+
+  private
+    def normalize_name
+      self.name = name.downcase.titleize
+      self.book_author = book_author.downcase.titleize
+    end 
 end
 
