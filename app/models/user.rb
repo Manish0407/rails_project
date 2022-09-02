@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  #has_many :books
+  has_many :book_issues
+  has_many :books, through: :book_issues
   before_validation :normalize_name, on: :create
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
