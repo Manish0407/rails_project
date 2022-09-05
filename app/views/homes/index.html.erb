@@ -16,6 +16,10 @@
         <li class="nav-item">
           <a class="nav-link" <%= link_to "Books", books_path %>></a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Issue", book_issues_path %>></a>
+        </li>
       
         <li class="nav-item">
           <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
@@ -28,7 +32,6 @@
     <div class="name"> 
       <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
     </div>
-
     <span class="name"> <%= current_user.name.camelize %> </span>
     <span class="name"> <%= current_user.type.camelize %> </span> 
     

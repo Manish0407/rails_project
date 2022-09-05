@@ -47,8 +47,8 @@
   box-shadow: 2px 2px 20px black;
 }
 table{
-  width: 500px;
-  height: 250px;
+  width: 100%;
+  height: auto;
 }
 .name{
   color: gold;

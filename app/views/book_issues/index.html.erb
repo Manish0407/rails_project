@@ -1,5 +1,5 @@
 <head>
-  <title>Books</title>
+  <title>Issue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -35,39 +35,32 @@
     
   </nav>
   <div class="book">
-    <caption>Books Details</caption>
+    <caption>Book Issues Details</caption>
     <table border="3px" cellpadding="3px" cellspacing="3px">
       <tr>
         <th>Book Name</th>
-        <th>Book Author</th>
-        <th>Book Quantity</th>
-        <% if current_user.student? %>
-          <th>Book issue request</th>
-        <% end %>  
+        <th>User Name</th>
+        <th>Status</th>
       </tr>
       <% if current_user.admin? %>
-      <% total = 0 %>
-        <% @books.each do |book| %>
+        <% @book_issues.each do |data| %>
           <tr>
-            <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
-            <td> <%= book.book_author %> </td>
-            <td> <%= book.qty %> </td>
-            <% total = total + book.qty %>
+            <td> <%= Book.find(data.book_id).name  %> </td>
+            <td> <%= User.find(data.user_id).name %> </td>
+            <td> <%= data.status %> </td>
+            <td> <%= button_to "accept", edit_book_issue_path(id: data.id, status: "allot") %> </td>
           </tr>
         <% end %>
-        <tr>
-          <td colspan="2">Total</td>
-          <td> <%= total %> </td>
-        </tr>
       <% end %>
       <% if current_user.student? %>
-        <% @books.each do |book| %>
-          <tr>
-            <td> <%= book.name %> </td>
-            <td> <%= book.book_author %> </td>
-            <td> <%= book.qty%> </td>
-            <td> <%= button_to "request", book_issues_path(book_id:book.id,user_id: current_user.id), :method => :post %>  </td>
-          </tr>
+        <% @book_issues.each do |data| %>
+          <% if current_user.id == data.user_id %>
+            <tr>
+              <td> <%= Book.find(data.book_id).name  %> </td>
+              <td> <%= User.find(data.user_id).name %> </td>
+              <td> <%= data.status %> </td>
+            </tr>
+          <% end %>  
         <% end %> 
       <% end %>   
     </table>
