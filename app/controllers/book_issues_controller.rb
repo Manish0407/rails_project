@@ -1,29 +1,31 @@
-class BookIssueController < ApplicationController
+class BookIssuesController < ApplicationController
   def index
     @book_issues = BookIssue.all
   end
 
-  # def show
-  #   @book_issue_issue = BookIssue.find(params[:id])
-  # end
+  def show
+    @book_issue = BookIssue.find(params[:id])
+  end
   
   def new
-    @book_issue = BookIssue.new
+    @book_issue = BookIssue.new(user_id: current_user.id, book_id: params[:id])
   end
 
   def create
     @book_issue = BookIssue.new(book_issue_params)
 
     if @book_issue.save
-      redirect_to @book_issue
+      redirect_to books_path
+      flash.notice = "Book Issue request Successfully created."
     else
-      render :new, status: :unprocessable_entity
+      flash.alert = @book_issue.errors.messages
+      redirect_to books_path
     end
   end
 
-  # def edit
-  #   @book_issue = BookIssue.find(params[:id])
-  # end
+  def edit
+    @book_issue = BookIssue.find(params[:id])
+  end
 
   # def update
   #   @book_issue = BookIssue.find(params[:id])
@@ -42,8 +44,8 @@ class BookIssueController < ApplicationController
   #   redirect_to root_path, status: :see_other
   # end
 
-  # private
-  #   def book_issue_params
-  #     params.require(:book_issue).permit(:book_name, :author, :qty, :status)
-  #   end
+  private
+    def book_issue_params
+      params.permit( :user_id, :book_id )
+    end
 end
