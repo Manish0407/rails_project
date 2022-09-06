@@ -5,24 +5,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
  </head>
  <body class="background">
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark container-12">
+  <nav class="navbar navbar-fix navbar-expand-sm bg-dark navbar-dark container-12">
      <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link"<%= link_to "Home", homes_path %>></a>
+          <a class="nav-link"<%= link_to "Home", homes_path %></a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Books", books_path %></a>
+        </li>
+
         <% if current_user.admin? %>
           <li class="nav-item">
-            <a class="nav-link" <%= link_to "Add Book", new_book_path %> ></a>
+            <a class="nav-link" <%= link_to "Add Book", new_book_path %></a>
           </li>
         <% end %>  
       
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" <%= link_to "Back", homes_path %>></a>
+          <a class="nav-link" <%= link_to "Back", homes_path %></a>
         </li>
       </ul>
     </div>
@@ -33,22 +35,37 @@
       <span class="name"> <%= current_user.name.camelize %> </span>
       <span class="name"> <%= current_user.type.camelize %> </span>
     
+    <div class="name">
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
+      </li>
+    </div>
   </nav>
   <div class="book">
     <caption>Book Issues Details</caption>
     <table border="3px" cellpadding="3px" cellspacing="3px">
       <tr>
         <th>Book Name</th>
-        <th>User Name</th>
+        <th>Author Name</th>
+        <% if current_user.admin? %>
+          <th>User Name</th>
+        <% end %>  
         <th>Status</th>
       </tr>
       <% if current_user.admin? %>
         <% @book_issues.each do |data| %>
           <tr>
             <td> <%= Book.find(data.book_id).name  %> </td>
+            <td> <%= Book.find(data.book_id).book_author %> </td>
             <td> <%= User.find(data.user_id).name %> </td>
             <td> <%= data.status %> </td>
-            <td> <%= button_to "accept", edit_book_issue_path(id: data.id, status: "allot") %> </td>
+            <% if data.status == "request" %>
+              <td> <%= button_to "allot", book_issue_path(:id => data.id, :status => 'allot'), :method => :patch %> </td>
+              <td> <%= button_to "cancel", book_issue_path(:id => data.id, :status => 'cancel'), :method => :patch %> </td>
+            <% end %>
+            <% if data.status == "return" %>
+              <td> <%= button_to "deposit", book_issue_path(:id => data.id, :status => 'deposit'), :method => :patch %> </td>
+            <% end %>  
           </tr>
         <% end %>
       <% end %>
@@ -57,8 +74,11 @@
           <% if current_user.id == data.user_id %>
             <tr>
               <td> <%= Book.find(data.book_id).name  %> </td>
-              <td> <%= User.find(data.user_id).name %> </td>
+              <td> <%= Book.find(data.book_id).book_author %> </td>
               <td> <%= data.status %> </td>
+              <% if data.status == "allot" %>
+                <td> <%= button_to "return", book_issue_path(:id => data.id, :status => 'return'), :method => :patch %> </td>
+              <% end %>
             </tr>
           <% end %>  
         <% end %> 
