@@ -20,6 +20,9 @@
  -o-background-size: cover;
  background-size: cover;
 }
+.nav-item{
+  list-style: none;
+}
 .contain{
   width: auto;
   height: auto;
@@ -40,22 +43,36 @@
   padding: 10px;
 }
 .book{
-  width: 500px;
+  width: 100%;
   height: auto;
   text-align: center;
   background-color: whitesmoke;
   box-shadow: 2px 2px 20px black;
 }
 table{
+  position: relative;
   width: 100%;
   height: auto;
+  margin-top: 55px;
 }
 .name{
-  color: gold;
-  margin-right: 50px;
+  color: gold!important;
+  margin-right: 50px!important;
 }
 .field_with_errors {
   padding: 2px;
   background-color: red;
   display: table;
+}
+.navbar-fix{
+  z-index: 11111;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+}
+.avail{
+  color: green;
+}
+.notavail{
+  color: darkred;
 }

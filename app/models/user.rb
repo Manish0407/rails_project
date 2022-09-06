@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :book_issues
+  has_many :book_issues, :dependent => :destroy
   has_many :books, through: :book_issues
   before_validation :normalize_name, on: :create
   devise :database_authenticatable, :registerable,

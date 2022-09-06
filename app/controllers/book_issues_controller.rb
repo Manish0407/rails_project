@@ -27,15 +27,33 @@ class BookIssuesController < ApplicationController
     @book_issue = BookIssue.find(params[:id])
   end
 
-  # def update
-  #   @book_issue = BookIssue.find(params[:id])
-
-  #   if @book_issue.update(book_issue_params)
-  #     redirect_to @book_issue
-  #   else
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    @book_issue = BookIssue.find(params[:id])
+    if params[:status] == "allot"
+      @book_issue.update(status: "allot")
+      book_id = BookIssue.find(params[:id]).book_id
+      @book = Book.find(book_id)
+      qty = @book.qty
+      @book.update(qty: qty-1)
+    elsif params[:status] == "cancel"
+      @book_issue.update(status: "cancel")
+    elsif params[:status] == "return"
+      @book_issue.update(status: "return")
+    elsif params[:status] == "deposit"
+      @book_issue.update(status: "deposit")
+      book_id = BookIssue.find(params[:id]).book_id
+      @book = Book.find(book_id)
+      qty = @book.qty
+      @book.update(qty: qty+1)
+    end     
+    if @book_issue.save
+      redirect_to book_issues_path
+      flash.notice = "status changed"
+    else
+      flash.alert = @book_issue.errors.messages
+      redirect_to book_issues_path
+    end
+  end
 
   #  def destroy
   #   @book_issue = BookIssue.find(params[:id])
