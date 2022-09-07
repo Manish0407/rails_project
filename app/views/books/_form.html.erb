@@ -18,20 +18,24 @@
         </li>
       
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %>></a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" <%= link_to "Back", homes_path %>></a>
         </li>
       </ul>
-    </div>
-    <div class="name"> 
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
     </div>
 
     <span class="name"> <%= current_user.name.camelize %> </span>
     <span class="name"> <%= current_user.type.camelize %> </span>
     
+    <div class="name"> 
+      <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>  
+    
+    <div class="name">
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
+      </li>
+    </div>
+
   </nav>
   <div>
     <caption><b>Edit Book</b></caption>
