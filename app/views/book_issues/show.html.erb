@@ -1,5 +1,5 @@
 <head>
-  <title>New Book</title>
+  <title></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -14,10 +14,6 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Add Book", new_book_path %></a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link" <%= link_to "Books", books_path %></a>
         </li>
       
@@ -28,7 +24,7 @@
     </div>
 
     <span class="name"> <%= current_user.name.camelize %> </span>
-    <span class="name"> <%= current_user.type.camelize %> </span>
+    <span class="name"> <%= current_user.type.camelize %> </span> 
     
     <div class="name"> 
       <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
@@ -41,36 +37,25 @@
     </div>
 
   </nav>
-  <div class="contain">
-    <caption><b>Create Book</b></caption>
-    <%= form_with model: @book do |form| %>
-      <div>
-        <%= form.label :name %><br>
-        <%= form.text_field :name %>
-        <% @book.errors.full_messages_for(:name).each do |message| %>
-          <div><%= message %></div>
-        <% end %>  
-      </div>
-
-      <div>
-        <%= form.label :book_author %><br>
-        <%= form.text_field :book_author %>
-        <% @book.errors.full_messages_for(:book_author).each do |message| %>
-          <div><%= message %></div>
+  <div class="book">
+    <caption>Book Issues Details</caption>
+    <table border="3px" cellpadding="3px" cellspacing="3px">
+      <tr>
+        <th>Book Name</th>
+        <th>Author Name</th>
+        <th>User Name</th>
+        <th>Status</th>
+      </tr>
+        <% @book_issues.each do |data| %>
+          <% if data.status == "allot" || data.status == "deposit" || data.status == "cancel" %>
+            <tr>
+              <td> <%= Book.find(data.book_id).name  %> </td>
+              <td> <%= Book.find(data.book_id).book_author %> </td>
+              <td> <%= User.find(data.user_id).name %> </td>
+              <td> <%= data.status %> </td>
+            </tr>
+          <% end %>  
         <% end %>
-      </div>
-
-      <div>
-        <%= form.label :qty %><br>
-        <%= form.number_field :qty %>
-        <% @book.errors.full_messages_for(:qty).each do |message| %>
-          <div><%= message %></div>
-        <% end %>  
-      </div>
-
-      <div>
-        <%= form.submit %>
-      </div>
-    <% end %>
+    </table>
   </div>
 </body>

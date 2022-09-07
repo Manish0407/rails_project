@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_02_073457) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_073443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "book_issues", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false

@@ -1,13 +1,20 @@
 class BookIssue < ApplicationRecord
   belongs_to :user
   belongs_to :book
-  before_create :set_status
   enum :status, [:request, :allot, :cancel, :return, :deposit]
-  validates :book_id, presence: true, uniqueness: { scope: :user_id }
+  validates :book_id, presence: true#, uniqueness: { scope: :user_id,}
+  # attr_accessor :status
 
-  private
+  # before_save :check_status
+  # private
 
-  def set_status
-    self.status = "request"
-  end
+  # def check_status
+  #   unless self.status_previous_change
+      
+  #   end
+  #   status.changed? 
+  # end
+  # def deposit
+  #   book_issue.where(user_id).where(book_id).status == "deposit"
+  # end
 end

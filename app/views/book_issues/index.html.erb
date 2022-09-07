@@ -1,5 +1,5 @@
 <head>
-  <title>Issue</title>
+  <title>Requests</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -21,6 +21,10 @@
           <li class="nav-item">
             <a class="nav-link" <%= link_to "Add Book", new_book_path %></a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" <%= link_to "Record", book_issue_record_path %></a>
+          </li>
         <% end %>  
       
         <li class="nav-item">
@@ -28,12 +32,13 @@
         </li>
       </ul>
     </div>
-    <div class="name"> 
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
-    </div>
     
-      <span class="name"> <%= current_user.name.camelize %> </span>
-      <span class="name"> <%= current_user.type.camelize %> </span>
+    <span class="name"> <%= current_user.name.camelize %> </span>
+    <span class="name"> <%= current_user.type.camelize %> </span>
+
+    <div class="name"> 
+      <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>
     
     <div class="name">
       <li class="nav-item">
@@ -54,19 +59,21 @@
       </tr>
       <% if current_user.admin? %>
         <% @book_issues.each do |data| %>
-          <tr>
-            <td> <%= Book.find(data.book_id).name  %> </td>
-            <td> <%= Book.find(data.book_id).book_author %> </td>
-            <td> <%= User.find(data.user_id).name %> </td>
-            <td> <%= data.status %> </td>
-            <% if data.status == "request" %>
-              <td> <%= button_to "allot", book_issue_path(:id => data.id, :status => 'allot'), :method => :patch %> </td>
-              <td> <%= button_to "cancel", book_issue_path(:id => data.id, :status => 'cancel'), :method => :patch %> </td>
-            <% end %>
-            <% if data.status == "return" %>
-              <td> <%= button_to "deposit", book_issue_path(:id => data.id, :status => 'deposit'), :method => :patch %> </td>
-            <% end %>  
-          </tr>
+          <% if data.status != "allot" && data.status != "deposit" && data.status != "cancel" %>
+            <tr>
+              <td> <%= Book.find(data.book_id).name  %> </td>
+              <td> <%= Book.find(data.book_id).book_author %> </td>
+              <td> <%= User.find(data.user_id).name %> </td>
+              <td> <%= data.status %> </td>
+              <% if data.status == "request" %>
+                <td> <%= button_to "allot", book_issue_path(:id => data.id, :status => 'allot'), :method => :patch %> </td>
+                <td> <%= button_to "cancel", book_issue_path(:id => data.id, :status => 'cancel'), :method => :patch %> </td>
+              <% end %>
+              <% if data.status == "return" %>
+                <td> <%= button_to "deposit", book_issue_path(:id => data.id, :status => 'deposit'), :method => :patch %> </td>
+              <% end %>  
+            </tr>
+          <% end %>  
         <% end %>
       <% end %>
       <% if current_user.student? %>

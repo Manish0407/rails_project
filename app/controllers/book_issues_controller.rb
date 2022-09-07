@@ -4,7 +4,11 @@ class BookIssuesController < ApplicationController
   end
 
   def show
-    @book_issue = BookIssue.find(params[:id])
+    @book_issues = BookIssue.where(params[:user_id])
+  end
+
+  def record
+    @book_issues = BookIssue.all
   end
   
   def new
@@ -64,6 +68,6 @@ class BookIssuesController < ApplicationController
 
   private
     def book_issue_params
-      params.permit( :user_id, :book_id )
+      params.permit( :user_id, :book_id)
     end
 end
