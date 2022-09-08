@@ -50,14 +50,12 @@
         <th>Status</th>
       </tr>
         <% @book_issues.each do |data| %>
-          <% if data.status == "allot" || data.status == "deposit" || data.status == "cancel" %>
             <tr>
               <td> <%= Book.find(data.book_id).name  %> </td>
               <td> <%= Book.find(data.book_id).book_author %> </td>
               <td> <%= User.find(data.user_id).name %> </td>
               <td> <%= data.status %> </td>
             </tr>
-          <% end %>  
         <% end %>
     </table>
   </div>

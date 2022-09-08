@@ -1,19 +1,23 @@
 class BookIssuesController < ApplicationController
   def index
-    @book_issues = BookIssue.all
+    @book_issues = BookIssue.where(status: [0,3])
   end
 
-  def show
-    @book_issues = BookIssue.where(params[:user_id])
-  end
+  # def show
+  #   @book_show = BookIssue.where(params[:user_id])
+  # end
 
   def record
-    @book_issues = BookIssue.all
+    @book_issues = BookIssue.where(status: [1,2,4])
   end
   
-  def new
-    @book_issue = BookIssue.new(user_id: current_user.id, book_id: params[:id])
+  def myrecord
+    @myrecords = BookIssue.where(user_id: current_user.id)
   end
+
+  # def new
+  #   @book_issue = BookIssue.new(user_id: current_user.id, book_id: params[:id])
+  # end
 
   def create
     @book_issue = BookIssue.new(book_issue_params)
@@ -51,11 +55,11 @@ class BookIssuesController < ApplicationController
       @book.update(qty: qty+1)
     end     
     if @book_issue.save
-      redirect_to book_issues_path
+      redirect_back(fallback_location: root_path) 
       flash.notice = "status changed"
     else
       flash.alert = @book_issue.errors.messages
-      redirect_to book_issues_path
+      redirect_to homes_path
     end
   end
 
