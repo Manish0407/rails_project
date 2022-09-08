@@ -52,44 +52,24 @@
       <tr>
         <th>Book Name</th>
         <th>Author Name</th>
-        <% if current_user.admin? %>
-          <th>User Name</th>
-        <% end %>  
+        <th>User Name</th>
         <th>Status</th>
       </tr>
-      <% if current_user.admin? %>
         <% @book_issues.each do |data| %>
-          <% if data.status != "allot" && data.status != "deposit" && data.status != "cancel" %>
-            <tr>
-              <td> <%= Book.find(data.book_id).name  %> </td>
-              <td> <%= Book.find(data.book_id).book_author %> </td>
-              <td> <%= User.find(data.user_id).name %> </td>
-              <td> <%= data.status %> </td>
-              <% if data.status == "request" %>
-                <td> <%= button_to "allot", book_issue_path(:id => data.id, :status => 'allot'), :method => :patch %> </td>
-                <td> <%= button_to "cancel", book_issue_path(:id => data.id, :status => 'cancel'), :method => :patch %> </td>
-              <% end %>
-              <% if data.status == "return" %>
-                <td> <%= button_to "deposit", book_issue_path(:id => data.id, :status => 'deposit'), :method => :patch %> </td>
-              <% end %>  
-            </tr>
-          <% end %>  
-        <% end %>
-      <% end %>
-      <% if current_user.student? %>
-        <% @book_issues.each do |data| %>
-          <% if current_user.id == data.user_id %>
-            <tr>
-              <td> <%= Book.find(data.book_id).name  %> </td>
-              <td> <%= Book.find(data.book_id).book_author %> </td>
-              <td> <%= data.status %> </td>
-              <% if data.status == "allot" %>
-                <td> <%= button_to "return", book_issue_path(:id => data.id, :status => 'return'), :method => :patch %> </td>
-              <% end %>
-            </tr>
-          <% end %>  
-        <% end %> 
-      <% end %>   
+          <tr>
+            <td> <%= Book.find(data.book_id).name  %> </td>
+            <td> <%= Book.find(data.book_id).book_author %> </td>
+            <td> <%= User.find(data.user_id).name %> </td>
+            <td> <%= data.status %> </td>
+            <% if data.status == "request" %>
+              <td> <%= button_to "allot", book_issue_path(:id => data.id, :status => 'allot'), :method => :patch %> </td>
+              <td> <%= button_to "cancel", book_issue_path(:id => data.id, :status => 'cancel'), :method => :patch %> </td>
+            <% end %>
+            <% if data.status == "return" %>
+              <td> <%= button_to "deposit", book_issue_path(:id => data.id, :status => 'deposit'), :method => :patch %> </td>
+            <% end %>  
+          </tr>
+        <% end %>  
     </table>
   </div>
 </body>

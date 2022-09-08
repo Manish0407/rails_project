@@ -23,4 +23,8 @@ class User < ApplicationRecord
     def normalize_name
       self.name = name.downcase.titleize
     end
+
+    # def check_status
+    #   BookIssue.find_by(user_id: current_user.id)
+    # end
 end

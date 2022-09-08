@@ -19,7 +19,7 @@
 
         <% if current_user.student? %>
           <li class="nav-item">
-            <a class="nav-link" <%= link_to "My record", book_issues_path %></a>
+            <a class="nav-link" <%= link_to "My record", book_issue_myrecord_path %></a>
           </li>
         <% end %>
 
@@ -51,6 +51,8 @@
         <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
       </li>
     </div>
-
   </nav>
+  <div>
+    What is the importance of books in our life? Books play a quintessential role in every student's life by introducing them to a world of imagination, providing knowledge of the outside world, improving their reading, writing and speaking skills as well as boosting memory and intelligence.
+  </div>
 </body>
