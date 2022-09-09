@@ -14,7 +14,4 @@ class BookIssue < ApplicationRecord
   #   end
   #   status.changed? 
   # end
-  # def deposit
-  #   book_issue.where(user_id).where(book_id).status == "deposit"
-  # end
 end

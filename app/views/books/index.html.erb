@@ -53,18 +53,16 @@
         <% end %>  
       </tr>
       <% if current_user.admin? %>
-      <% total = 0 %>
         <% @books.each do |book| %>
           <tr>
             <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
             <td> <%= book.book_author %> </td>
             <td> <%= book.qty %> </td>
-            <% total = total + book.qty %>
           </tr>
         <% end %>
         <tr>
           <td colspan="2">Total</td>
-          <td> <%= total %> </td>
+          <td> <%= @quantity %> </td>
         </tr>
       <% end %>
       <% if current_user.student? %>

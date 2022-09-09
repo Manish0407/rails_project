@@ -3,17 +3,18 @@ class BookIssuesController < ApplicationController
     @book_issues = BookIssue.where(status: [0,3])
   end
 
-  # def show
-  #   @book_show = BookIssue.where(params[:user_id])
-  # end
-
   def record
     @book_issues = BookIssue.where(status: [1,2,4])
   end
+
   
   def myrecord
     @myrecords = BookIssue.where(user_id: current_user.id)
   end
+
+  def student
+    @student = BookIssue.where(user_id: params[:id])
+  end  
 
   # def new
   #   @book_issue = BookIssue.new(user_id: current_user.id, book_id: params[:id])
@@ -31,9 +32,9 @@ class BookIssuesController < ApplicationController
     end
   end
 
-  def edit
-    @book_issue = BookIssue.find(params[:id])
-  end
+  # def edit
+  #   @book_issue = BookIssue.find(params[:id])
+  # end
 
   def update
     @book_issue = BookIssue.find(params[:id])

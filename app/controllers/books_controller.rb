@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
   def index
+    @quantity = 0
     @books = Book.all
+    @books.each do |book|
+      @quantity += book.qty
+    end 
   end
 
   def new

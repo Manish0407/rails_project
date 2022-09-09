@@ -1,24 +1,20 @@
 <head>
-  <title>Home</title>
+  <title>Issue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
  </head>
  <body class="background">
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark container-12">
-    <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
+  <nav class="navbar navbar-fix navbar-expand-sm bg-dark navbar-dark container-12">
+     <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link"<%= link_to "Home", homes_path %>></a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" <%= link_to "Books", books_path %>></a>
+          <a class="nav-link"<%= link_to "Home", homes_path %></a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Record", book_issue_record_path %></a>
+          <a class="nav-link" <%= link_to "Books", books_path %></a>
         </li>
 
         <li class="nav-item">
@@ -26,14 +22,14 @@
         </li>
       
         <li class="nav-item">
-          <a class="nav-link" <%= link_to "Back", homes_path %>></a>
+          <a class="nav-link" <%= link_to "Back", :back %></a>
         </li>
       </ul>
     </div>
-
-    <span class="name"> <%= current_user.name.camelize %> </span>
-    <span class="name"> <%= current_user.type.camelize %> </span> 
-
+    
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name"> <%= current_user.type.camelize %> </span>
+    
     <div class="name"> 
       <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
     </div>  
@@ -43,20 +39,24 @@
         <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
       </li>
     </div>
-    
   </nav>
   <div class="book">
-    <caption>Student Details</caption>
+    <caption>Book Issues Details</caption>
     <table border="3px" cellpadding="3px" cellspacing="3px">
       <tr>
-        <th>Student Name</th>
+        <th>Book Name</th>
+        <th>Author Name</th>
+        <th>User Name</th>
+        <th>Status</th>
       </tr>
-        <% @users.each do |user| %>
+        <% @student.each do |data| %>
           <tr>
-            <td> <%= link_to user.name, book_issue_path(id: user.id), :method => :get %></td>
+            <td> <%= Book.find(data.book_id).name  %> </td>
+            <td> <%= Book.find(data.book_id).book_author %> </td>
+            <td> <%= User.find(data.user_id).name %> </td>
+            <td> <%= data.status %> </td>
           </tr>
         <% end %>
-      <tr>
     </table>
   </div>
 </body>
