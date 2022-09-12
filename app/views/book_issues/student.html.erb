@@ -48,6 +48,8 @@
         <th>Author Name</th>
         <th>User Name</th>
         <th>Status</th>
+        <th>Created_at</th>
+        <th>Days</th>
       </tr>
         <% @student.each do |data| %>
           <tr>
@@ -55,6 +57,8 @@
             <td> <%= Book.find(data.book_id).book_author %> </td>
             <td> <%= User.find(data.user_id).name %> </td>
             <td> <%= data.status %> </td>
+            <td> <%= data.created_at.to_date %> </td>
+            <td> <%= ((Time.now - data.created_at)/86400).to_i %> days</td>
           </tr>
         <% end %>
     </table>

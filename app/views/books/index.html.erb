@@ -55,7 +55,7 @@
       <% if current_user.admin? %>
         <% @books.each do |book| %>
           <tr>
-            <td><abbr title="click for edit and delete the book"> <%= link_to book.name, book %> </abbr></td>
+            <td><abbr title="click for edit and delete the book"><b> <%= link_to book.name, book %> </b></abbr></td>
             <td> <%= book.book_author %> </td>
             <td> <%= book.qty %> </td>
           </tr>

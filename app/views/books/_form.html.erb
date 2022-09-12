@@ -37,31 +37,21 @@
     </div>
 
   </nav>
-  <div>
-    <caption><b>Edit Book</b></caption>
+  <div class="contain">
     <%= form_with model: @book do |form| %>
       <div>
         <%= form.label :name %><br>
         <%= form.text_field :name %>
-        <!--<#% @book.errors.full_messages_for(:name).each do |message| %> -->
-          <!-- <div><#%= message %></div> -->
-         <!--  <#% end %> --> 
       </div>
 
       <div>
         <%= form.label :book_author %><br>
         <%= form.text_field :book_author %>
-       <!--  <#% @book.errors.full_messages_for(:book_author).each do |message| %> -->
-          <!-- <div><#%= message %></div> -->
-       <!--  <#% end %> -->
       </div>
 
       <div>
         <%= form.label :qty %><br>
         <%= form.number_field :qty %>
-       <!--  <#% @book.errors.full_messages_for(:qty).each do |message| %> -->
-          <!-- <div><#%= message %></div> -->
-         <!--  <#% end %> -->
       </div>
 
       <div>
