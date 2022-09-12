@@ -41,7 +41,7 @@
     </div>
   </nav>
   <div class="book">
-    <caption>Book Issues Details</caption>
+    <caption><b>Book Issues Details</b></caption>
     <table border="3px" cellpadding="3px" cellspacing="3px">
       <tr>
         <th>Book Name</th>
@@ -53,7 +53,7 @@
             <tr>
               <td> <%= Book.find(data.book_id).name  %> </td>
               <td> <%= Book.find(data.book_id).book_author %> </td>
-              <td> <%= button_to User.find(data.user_id).name, student_book_issue_path(:id => data.user_id), :method => :get %> </td>
+              <td><b> <%= link_to User.find(data.user_id).name, student_book_issue_path(:id => data.user_id), :action => :student, :method => :get, :remote => true %> </b></td>
               <td> <%= data.status %> </td>
             </tr>
         <% end %>
