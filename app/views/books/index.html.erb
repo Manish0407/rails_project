@@ -72,10 +72,10 @@
             <td> <%= book.book_author %> </td>
             <% if book.qty >= 1 %>
               <td class="avail"> Available </td>
+              <td> <%= button_to "request", book_issues_path(book_id: book.id, user_id: current_user.id), :method => :post %>  </td>
             <% else %>
               <td class="notavail">Not Available </td> 
-            <% end %>
-            <td> <%= button_to "request", book_issues_path(book_id: book.id, user_id: current_user.id), :method => :post %>  </td>
+            <% end %>  
           </tr>
         <% end %> 
       <% end %>   
