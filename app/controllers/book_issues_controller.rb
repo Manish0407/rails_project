@@ -22,7 +22,6 @@ class BookIssuesController < ApplicationController
 
   def create
     @book_issue = BookIssue.new(book_issue_params)
-
     if @book_issue.save
       redirect_to books_path
       flash.notice = "Book Issue request Successfully created."
@@ -38,30 +37,14 @@ class BookIssuesController < ApplicationController
 
   def update
     @book_issue = BookIssue.find(params[:id])
-    if params[:status] == "allot"
-      @book_issue.update(status: "allot")
-      book_id = BookIssue.find(params[:id]).book_id
-      @book = Book.find(book_id)
-      qty = @book.qty
-      @book.update(qty: qty-1)
-    elsif params[:status] == "cancel"
-      @book_issue.update(status: "cancel")
-    elsif params[:status] == "return"
-      @book_issue.update(status: "return")
-    elsif params[:status] == "deposit"
-      @book_issue.update(status: "deposit")
-      book_id = BookIssue.find(params[:id]).book_id
-      @book = Book.find(book_id)
-      qty = @book.qty
-      @book.update(qty: qty+1)
-    end     
-    if @book_issue.save
+    updation = @book_issue.update(status: params[:status])
+    if updation
       redirect_back(fallback_location: root_path) 
       flash.notice = "status changed"
     else
       flash.alert = @book_issue.errors.messages
       redirect_to homes_path
-    end
+    end 
   end
 
   #  def destroy

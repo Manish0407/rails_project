@@ -37,6 +37,8 @@
 .edit{
   width: 500px;
   box-shadow: 3px 3px 20px black;
+  margin-top: 20px;
+  margin-left: 400px;
 }
 .field{
   height: 70px;
@@ -77,6 +79,9 @@ a{
 }
 body{
   color: #285889 !important;
+}
+.f{
+  margin-left: 25px;
 }
 /*[type=submit], button {
     -webkit-appearance: button;
