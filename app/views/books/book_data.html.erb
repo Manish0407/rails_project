@@ -1,0 +1,68 @@
+<p style="color: green"><%= notice %></p>
+<head>
+  <title>Books</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="background">
+  <nav class="navbar navbar-fix navbar-expand-sm bg-dark navbar-dark container-12">
+     <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Home", homes_path %></a>
+        </li>
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <a class="nav-link" <%= link_to "Add Book", new_book_path %></a>
+          </li>
+        <% end %>  
+      
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Back", homes_path %></a>
+        </li>
+      </ul>
+    </div>
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name"> <%= current_user.type.camelize %> </span>
+
+    <div class="name"> 
+      <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>  
+    
+    <div class="name">
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
+      </li>
+    </div>
+  </nav>
+
+  <div id="users">
+    <table id="my-table">
+      <thead>
+        <tr>
+          <th>Book Name</th>
+          <th>Author Name</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td><%= book.name %></td>
+            <td><%= book.book_author %></td>
+            <td><%= book.qty %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</body>

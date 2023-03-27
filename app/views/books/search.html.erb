@@ -1,0 +1,62 @@
+<head>
+  <title>Books</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body class="background">
+  <nav class="navbar navbar-fix navbar-expand-sm bg-dark navbar-dark container-12">
+     <%= image_tag 'logo.jpg', alt: 'logo', width: "65", height: "45" %>
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to "Back", homes_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"<%= link_to "Home", homes_path %></a>
+        </li>
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <a class="nav-link" <%= link_to "Add Book", new_book_path %></a>
+          </li>
+        <% end %>  
+      
+      <div class="search">
+        <%= form_for search_path, method: :get do |f| %>
+          <span>
+            <a class="nav-link">
+              <%= f.label "Search for" %>
+              <%= text_field_tag :q, params[:q] %>
+              <%= submit_tag "Go", name: nil %>
+            </a>
+          </span>
+        <% end %>
+      </div>
+      </ul>
+    </div>
+    
+      <span class="name"> <%= current_user.name.camelize %> </span>
+      <span class="name"> <%= current_user.type.camelize %> </span>
+
+    <div class="name"> 
+      <%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link' %>
+    </div>  
+    
+    <div class="name">
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Signout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %></a>
+      </li>
+    </div>
+  </nav>
+  <div>
+    <ul>
+      <% @books.each do |book| %>
+        <li>
+          <h3>
+            <%= link_to book.name, controller: "books", action: "show", id: book.id%>
+          </h3>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</body>

@@ -9,7 +9,17 @@ application.register("hello", HelloController)
 // import { lazyLoadControllersFrom } from "@hotwired/stimulus-loading"
 // lazyLoadControllersFrom("controllers", application)
 $(document).ready(function() {
-  $('#my-table').DataTable({
-  	"pageLength" : 2,
+  $('#dttb').DataTable({
+    "pageLength": 4,
+    "processing": true,
+    "serverSide": true,
+    "ajax": {
+      "url": $('#dttb').data('source')
+    },
+    "columns": [
+      {"data": "name"},
+      {"data": "book_author"},
+      {"data": "qty"}
+    ]
   });
 });

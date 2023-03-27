@@ -1,0 +1,13 @@
+<div style="background: lightgrey; width: 300px; padding: 5px;">
+  <span>Book name : </span>
+  <%= book.name %>
+  <br>
+  <span>Author : </span>
+  <%= book.book_author %>
+  <br>
+  <span>Quantity : </span>
+  <%= book.qty %>
+  <br>
+  <%= link_to :edit, edit_book_path(book), target: :_blank  %>
+</div>
+<br>

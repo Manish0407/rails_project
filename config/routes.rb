@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'book_issues', to: 'book_issues#index'
   post 'book_issues', to: 'book_issues#create'
   patch 'book_issue', to: 'book_issues#update'
+  get 'book_data', to: 'books#book_data'
+  get 'hotwire_index', to: 'books#hotwire_index'
+  get 'search', to: 'books#search'
   # get 'book_issues/student/:id', to: 'book_issues#student'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
